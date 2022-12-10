@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/Inogeo/giseye/compare/v1.3.0...v1.3.1) (2022-12-10)
+
+
+### Bug Fixes
+
+* **app:** Fixed remaining errors in app name ([76dfa65](https://github.com/Inogeo/giseye/commit/76dfa651a1b80ff295ae1bc4b1037624c1a0f202))
+
 ## [1.3.0](https://github.com/Inogeo/giseye/compare/v1.2.0...v1.3.0) (2022-12-10)
 
 
