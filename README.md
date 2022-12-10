@@ -18,4 +18,12 @@ docker-compose up
 ```
 
 # Run in production
-Not available yet.
+
+To build the app, run the special docker-compose:
+
+```(shell)
+docker-compose -f .\docker-compose.build.yml up
+```
+
+
+Documentation to deploy the build in production is not available yet.

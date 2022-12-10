@@ -4,12 +4,13 @@ services:
   gisbro:
     container_name: gisbro
     build: .
-    entrypoint: npm run start
+    entrypoint: npm run build
     environment:
       - REACT_APP_SITEURL=${REACT_APP_SITEURL}
       - REACT_APP_FETCH_TIMEOUT=${REACT_APP_FETCH_TIMEOUT}
     volumes:
      - ./app/public:/home/node/app/public
      - ./app/src:/home/node/app/src
+     - ./app/build:/home/node/app/build
     ports:
       - "${HTTP_DEV_PORT}:3000"

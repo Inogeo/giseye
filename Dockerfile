@@ -6,4 +6,4 @@ ENV NODE_ENV=development
 ENV WATCHPACK_POLLING=true
 COPY ./app/ .
 EXPOSE 3000
-ENTRYPOINT npm run start
+# ENTRYPOINT npm run start
