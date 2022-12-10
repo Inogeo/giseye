@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  gisbro:
-    container_name: gisbro
+  giseye:
+    container_name: giseye
     build: .
     entrypoint: npm run build
     environment:
