@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/Inogeo/giseye/compare/v1.2.0...v1.3.0) (2022-12-10)
+
+
+### Features
+
+* **CICD:** added the capacity to make a build from docker-compose ([6167b2a](https://github.com/Inogeo/giseye/commit/6167b2aa90ac8e1fdcedc501ba20eeed945cdf43))
+* **CICD:** cached node dependencies in workflow ([a9a1cc3](https://github.com/Inogeo/giseye/commit/a9a1cc315e2ee5454410cb4797a6cff91bb54c34))
+
+
+### Bug Fixes
+
+* **env:** added env to repo and removed useless URLs ([99332e9](https://github.com/Inogeo/giseye/commit/99332e9cc35080dfcf5af2d3290be501bcdeede3))
+
 ## [1.2.0](https://github.com/Inogeo/giseye/compare/v1.1.0...v1.2.0) (2022-12-10)
 
 
