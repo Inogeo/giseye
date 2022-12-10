@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Inogeo/giseye/compare/v1.0.0...v1.1.0) (2022-12-10)
+
+
+### Features
+
+* **CI/CD:** added continuous build ([663a215](https://github.com/Inogeo/giseye/commit/663a215349e4e39eaad3ce39d77eba819f8e4e4b))
+
 ## 1.0.0 (2022-12-10)
 
 
