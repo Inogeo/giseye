@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (2022-12-10)
+
+
+### Features
+
+* initial commit ([6d2dbd6](https://github.com/Inogeo/giseye/commit/6d2dbd64a27a77ddfde7e1664d8bbc3dee51c9f8))
+
 ## [1.2.0](https://github.com/Inogeo/xptrack-frontend/compare/v1.1.0...v1.2.0) (2022-12-10)
 
 
