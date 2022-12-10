@@ -1,0 +1,25 @@
+name: Continuous Integration
+
+#on: [pull_request]
+
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    name: Build the app
+    runs-on: ubuntu-latest    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: npm install
+
+      - name: Build app
+        run: npm run build
