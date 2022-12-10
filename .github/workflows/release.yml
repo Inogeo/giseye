@@ -1,25 +1,36 @@
-name: Continuous Integration
+# Workflow name
+name: new-release
 
-#on: [pull_request]
-
+# Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
 
 jobs:
+
   build:
     name: Build the app
     runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-          with:
-            node-version: '16'
+        with:
+          node-version: '16'
 
       - name: Install dependencies
         working-directory: ./app
         run: npm install
 
       - name: Build app
+        working-directory: ./app
         run: npm run build
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: release-please-action

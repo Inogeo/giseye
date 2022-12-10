@@ -16,7 +16,6 @@ import 'leaflet/dist/leaflet.css';
 
 // Import JSX components
 import Catalog from './jsx/Catalog';
-import { WMSTileLayer } from 'react-leaflet/WMSTileLayer'
 
 // Fix for leaflet default markers sources
 delete L.Icon.Default.prototype._getIconUrl;
@@ -49,16 +48,16 @@ function App() {
       {/* Nav Bar to filter components */}
         <nav className="uk-navbar-container uk-margin-remove" uk-navbar="">
           <div className="uk-navbar-left">
-            <a className="uk-navbar-item uk-logo"><span className="uk-margin-medium-left uk-text-center" uk-icon="icon: world; ratio: 1.4"></span></a>
+            <a className="uk-navbar-item uk-logo" href="/"><span className="uk-margin-medium-left uk-text-center" uk-icon="icon: world; ratio: 1.4"></span></a>
             <ul className="uk-navbar-nav">
               <li uk-filter-control="[filter-map='true']">
-                <a >Default</a>
+                <a href="/">Default</a>
               </li>
               <li uk-filter-control="[filter-maponly='true']">
-                <a >Fullscreen</a>
+                <a href="/">Fullscreen</a>
               </li>
               <li className="uk-active" uk-filter-control="[filter-catalog='true']">
-                <a >Catalog</a>
+                <a href="/">Catalog</a>
               </li>
             </ul>
           </div>
@@ -87,7 +86,7 @@ function App() {
           <hr></hr>
           <ul uk-accordion='' uk-sortable="handle: .uk-sortable-handle">
             <li className='uk-open uk-background-muted uk-padding-small'>
-              <a className='uk-accordion-title' uk-tooltip="Drag/Drop to re-order layers; delay: 500">
+              <a className='uk-accordion-title' href="/" uk-tooltip="Drag/Drop to re-order layers; delay: 500">
                 <span className="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table" uk-tooltip="Change layer order"></span>
                 Layer 1
               </a>

@@ -1,13 +1,14 @@
 version: "3"
 
 services:
-  xptrack-frontend:
-    container_name: xptrack-frontend
+  gisbro:
+    container_name: gisbro
     build: .
     environment:
       - REACT_APP_SITEURL=${REACT_APP_SITEURL}
       - REACT_APP_FETCH_TIMEOUT=${REACT_APP_FETCH_TIMEOUT}
     volumes:
-     - ./app:/home/node/app/
+     - ./app/public:/home/node/app/public
+     - ./app/src:/home/node/app/src
     ports:
       - "${HTTP_DEV_PORT}:3000"
