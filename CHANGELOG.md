@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Inogeo/giseye/compare/v1.1.0...v1.2.0) (2022-12-10)
+
+
+### Features
+
+* **workflow:** improvement of the release workflow by adding a build step ([085d3b3](https://github.com/Inogeo/giseye/commit/085d3b3a4713a42084d683c42913e11319767f8c))
+
 ## [1.1.0](https://github.com/Inogeo/giseye/compare/v1.0.0...v1.1.0) (2022-12-10)
 
 
