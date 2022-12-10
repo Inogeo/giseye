@@ -8,10 +8,10 @@ To run this in development mode, all you need is [GIT](https://git-scm.com/book/
 
 First clone the repo:
 ```
-https://github.com/Inogeo/giseye.git
+git clone https://github.com/Inogeo/giseye.git
 ```
 
-Then run docker:
+Then run docker-compose:
 
 ```(shell)
 docker-compose up
