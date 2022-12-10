@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  xptrack-frontend:
-    container_name: xptrack-frontend
+  gisbro:
+    container_name: gisbro
     build: .
     environment:
       - REACT_APP_SITEURL=${REACT_APP_SITEURL}

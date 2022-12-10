@@ -24,3 +24,5 @@ jobs:
       - name: Build app
         working-directory: ./app
         run: npm run build
+
+# TODO: add testing repo
