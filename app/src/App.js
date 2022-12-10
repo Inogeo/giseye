@@ -16,7 +16,6 @@ import 'leaflet/dist/leaflet.css';
 
 // Import JSX components
 import Catalog from './jsx/Catalog';
-import { WMSTileLayer } from 'react-leaflet/WMSTileLayer'
 
 // Fix for leaflet default markers sources
 delete L.Icon.Default.prototype._getIconUrl;
