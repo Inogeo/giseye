@@ -46,7 +46,7 @@ function App() {
   return (
     <div className='uk-text-center uk-height-1-1' uk-filter="target: .js-filter">
       {/* Nav Bar to filter components */}
-        <nav className="uk-navbar-container uk-margin-remove" uk-navbar="">
+        {/* <nav className="uk-navbar-container uk-margin-remove" uk-navbar="">
           <div className="uk-navbar-left">
             <a className="uk-navbar-item uk-logo" href="/"><span className="uk-margin-medium-left uk-text-center" uk-icon="icon: world; ratio: 1.4"></span></a>
             <ul className="uk-navbar-nav">
@@ -61,7 +61,7 @@ function App() {
               </li>
             </ul>
           </div>
-        </nav>
+        </nav> */}
 
       {/* Content */}
       <div className='uk-grid-collapse js-filter' uk-sortable="handle: .uk-sortable-handle" style={{ height: 'calc(100% - 80px)' }} uk-grid=''>
