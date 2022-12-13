@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/Inogeo/giseye/compare/v1.3.1...v1.4.0) (2022-12-10)
+
+
+### Features
+
+* **CICD:** automatically check for outdated dependencies ([f5fe457](https://github.com/Inogeo/giseye/commit/f5fe457256fe46493e8312affdd439c002bf79f6))
+
 ## [1.3.1](https://github.com/Inogeo/giseye/compare/v1.3.0...v1.3.1) (2022-12-10)
 
 
