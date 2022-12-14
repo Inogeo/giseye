@@ -27,10 +27,10 @@ export default function Catalog({handleLayerAdd}){
 
 
     return (
-        <div className = "uk-width-2-5@xl" filter-catalog='true'>
+        <div className = "uk-width-2-5@l" filter-catalog='true'>
             <div className="uk-grid-collapse" uk-grid=''>
                 {/* Catalog Sources */}
-                <div className='uk-width-1-3@m uk-width-1-2@s uk-padding-small uk-text-left uk-background-default'>
+                <div className='uk-width-2-5@s uk-padding-small uk-text-left uk-background-default'>
                     <div>
                         <CatalogNewService handleNewServiceAddToCatalog={handleServiceAdd}></CatalogNewService>
                         <CatalogServicesList services={services} handleServiceConnect={handleServiceConnect}></CatalogServicesList>
@@ -38,7 +38,7 @@ export default function Catalog({handleLayerAdd}){
                 </div>
 
                 {/* Service connected (ServiceConnect) */}
-                <div className='uk-width-2-3@m uk-width-1-2@s uk-padding-small uk-text-left uk-background-default'>
+                <div className='uk-width-3-5@s uk-padding-small uk-text-left uk-background-default'>
                     <CatalogServiceConnect key={serviceConnect.uuid} serviceConnect={serviceConnect} handleLayerAdd={handleLayerAdd}></CatalogServiceConnect>
                 </div>
             </div>
