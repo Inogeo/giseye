@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/Inogeo/giseye/compare/v1.4.0...v1.5.0) (2022-12-14)
+
+
+### Features
+
+* **toolbar:** improvement of toolbar responsivity ([7200bdd](https://github.com/Inogeo/giseye/commit/7200bdd7ee9700b52744d0c21f45e1dd0640b049))
+
 ## [1.4.0](https://github.com/Inogeo/giseye/compare/v1.3.1...v1.4.0) (2022-12-10)
 
 
