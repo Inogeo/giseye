@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/Inogeo/giseye/compare/v1.5.0...v1.5.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* **UX:** improvement on user interface ([4e38ba7](https://github.com/Inogeo/giseye/commit/4e38ba7ebb397abebe983eaa391589a86f38c0e9))
+* **UX:** improvement on UX by fixing components heights ([24f1a29](https://github.com/Inogeo/giseye/commit/24f1a2925ec18da04501e01e863bd9259cd94313))
+
 ## [1.5.0](https://github.com/Inogeo/giseye/compare/v1.4.0...v1.5.0) (2022-12-14)
 
 
