@@ -25,7 +25,7 @@ export default function CatalogServicesList({ services, handleServiceConnect }){
 
     return (
         <div>
-            <div className="uk-padding-remove uk-overflow-auto" style={{ height: 'calc(100vh - 337px)' }}>
+            <div className="uk-padding-remove uk-overflow-auto" style={{ height: 'calc(100vh - 338px)' }}>
                 {servicesDOM}
             </div>
         </div>
