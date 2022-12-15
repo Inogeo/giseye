@@ -94,7 +94,7 @@ function App() {
           </ul>
         </div>
         
-        <div className='uk-grid-collapse js-filter uk-height-1-1 uk-width-expand uk-overflow-auto' uk-sortable="handle: .uk-sortable-handle" uk-grid=''>
+        <div className='uk-grid-collapse js-filter uk-height-1-1 uk-width-expand uk-overflow-auto' uk-grid=''>
 
           {/*Catalog*/}
           <Catalog handleLayerAdd={handleLayerAdd}></Catalog>
@@ -112,7 +112,7 @@ function App() {
 
           {/* Main map legend */}
           <div className='uk-width-1-6@l uk-width-1-5@m uk-padding-small uk-text-left uk-background-default' filter-catalog='true' filter-map='true'>
-            <p className='uk-text-large'><span className="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table"></span>Legend</p>
+            <p className='uk-text-large'>Legend</p>
             <hr></hr>
             <ul uk-accordion='' uk-sortable="handle: .uk-sortable-handle">
               <li className='uk-open uk-background-muted uk-padding-small'>

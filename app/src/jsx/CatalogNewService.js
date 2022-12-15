@@ -81,7 +81,7 @@ export default function CatalogNewService({handleNewServiceAddToCatalog}){
 
     return (
         <div>
-            <p className='uk-text-large '><span className="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table"></span>Data sources</p>
+            <p className='uk-text-large '>Data sources</p>
             <hr></hr>
             <form onSubmit={handleNewServiceAdd}>
                 <fieldset className="uk-fieldset">
