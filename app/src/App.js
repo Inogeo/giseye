@@ -6,19 +6,19 @@ import Icons from 'uikit/dist/js/uikit-icons';
 // Import REACT
 import React, {
   //useEffect,
-  useState
+  useState,
 } from "react";
 
 // Import Leaflet
-import L from 'leaflet';
-import { MapContainer, TileLayer } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css';
+// import L from 'leaflet';
+// import 'leaflet/dist/leaflet.css';
 
 // Import JSX components
 import Catalog from './jsx/Catalog';
+import Map from './jsx/Map'
 
 // Fix for leaflet default markers sources
-delete L.Icon.Default.prototype._getIconUrl;
+//delete L.Icon.Default.prototype._getIconUrl;
 // L.Icon.Default.mergeOptions({type
 //   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png').default,
 //   iconUrl: require('leaflet/dist/images/marker-icon.png').default,
@@ -45,23 +45,6 @@ function App() {
 
   return (
     <div className='uk-text-center uk-height-1-1' uk-filter="target: .js-filter">
-      {/* Nav Bar to filter components */}
-        {/* <nav className="uk-navbar-container uk-margin-remove" uk-navbar="">
-          <div className="uk-navbar-left">
-            <a className="uk-navbar-item uk-logo" href="/"><span className="uk-margin-medium-left uk-text-center" uk-icon="icon: world; ratio: 1.4"></span></a>
-            <ul className="uk-navbar-nav">
-              <li uk-filter-control="[filter-map='true']">
-                <a href="/">Default</a>
-              </li>
-              <li uk-filter-control="[filter-maponly='true']">
-                <a href="/">Fullscreen</a>
-              </li>
-              <li className="uk-active" uk-filter-control="[filter-catalog='true']">
-                <a href="/">Catalog</a>
-              </li>
-            </ul>
-          </div>
-        </nav> */}
 
       {/* Content */}
 
@@ -71,7 +54,7 @@ function App() {
   
         <div className='uk-width-auto uk-height-1-1 uk-text-left uk-background-primary uk-light' filter-catalog='true' filter-map='true' filter-maponly='true'>
           <ul className="uk-iconnav uk-iconnav-vertical">
-            <li uk-filter-control="[filter-maponly='true']">
+            <li className="uk-active" uk-filter-control="[filter-maponly='true']">
               <a href="/" className="uk-padding-small uk-padding-remove-bottom">
                 <span uk-icon="icon: location" uk-tooltip="title: Map; pos: right;"></span>
               </a>
@@ -81,7 +64,7 @@ function App() {
                 <span uk-icon="icon: list" uk-tooltip="title: Map with legend; pos: right;"></span>
               </a>
             </li>
-            <li className="uk-active" uk-filter-control="[filter-catalog='true']">
+            <li uk-filter-control="[filter-catalog='true']">
               <a href="/" className="uk-padding-small uk-padding-remove-bottom">
                 <span uk-icon="icon: search" uk-tooltip="title: Add service; pos: right;"></span>
               </a>
@@ -101,13 +84,7 @@ function App() {
 
           {/* Main map */}
           <div className='uk-width-expand@m uk-height-1-1 uk-text-left' filter-catalog='true' filter-map='true' filter-maponly='true'>
-            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true} className="uk-height-1-1">
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-              />
-              {mapLayersDOM}
-            </MapContainer>
+            <Map></Map>
           </div>
 
           {/* Main map legend */}
