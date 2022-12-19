@@ -9,7 +9,7 @@ import React, {
     useEffect
 } from "react";
 
-import debounce from './utils/Debounce';
+//import debounce from './utils/Debounce';
 
 // import useResizeObserver from "@react-hook/resize-observer";
 
@@ -39,7 +39,7 @@ export default function Map() {
         });
         resizer.observe(mapContainer.current);
 
-    }, [])
+    }, [API_KEY, lat, lng, zoom])
 
     return (
         <div ref={mapContainer} id='test' className="uk-height-1-1">
