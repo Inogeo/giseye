@@ -33,7 +33,6 @@ export default function Map() {
             scrollZoom: true,
         });
 
-        console.log('map resized')
         const resizer = new ResizeObserver(entries => {
             if (map.current) map.current.resize();    
         });
@@ -42,8 +41,8 @@ export default function Map() {
     }, [API_KEY, lat, lng, zoom])
 
     return (
-        <div ref={mapContainer} id='test' className="uk-height-1-1">
-            <div  className="uk-height-1-1"></div>
+        <div className="uk-height-1-1">
+            <div className="uk-height-1-1" ref={mapContainer} ></div>
         </div>
     );
 
