@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.2](https://github.com/Inogeo/giseye/compare/v1.5.1...v1.5.2) (2022-12-20)
+
+
+### Bug Fixes
+
+* **.env:** removed env from being tracked ([c05ccdb](https://github.com/Inogeo/giseye/commit/c05ccdb6e4b55f72a3a2b887b7955c2a30a929af))
+* **docker:** added api key in docker_compose ([ac8be53](https://github.com/Inogeo/giseye/commit/ac8be53190a2a0b691db430a9ccd6696de4e5f78))
+* **env:** env file taken out from repo to avoid sensitive information being shared ([55fe13d](https://github.com/Inogeo/giseye/commit/55fe13ddd6c88f0ea4308b03250f91f8689d8f6a))
+* **env:** temporary commit of API key ([d0dcf44](https://github.com/Inogeo/giseye/commit/d0dcf44d67ae9fc74c1b0247db2e034ef39f621c))
+* **map:** changed default background ([df5c77f](https://github.com/Inogeo/giseye/commit/df5c77fe034a16cb3ed08b4b5b235e4d869da035))
+* **Map:** fix warning on useEffect dependency array warning ([64fd3b8](https://github.com/Inogeo/giseye/commit/64fd3b87b3ab9bd4b576e53d09e733d307c3472b))
+* **map:** fixed minor bug in map DOM rendering ([30b4625](https://github.com/Inogeo/giseye/commit/30b46259649b0b89d84a4f3cb5f3eed6f4e6c173))
+* **UX:** removed possibility to sort panels of the interface ([62658c0](https://github.com/Inogeo/giseye/commit/62658c00f1f2b607e9faddd9cd0142f499fbd1a1))
+* **UX:** removed scroll in large view for catalog ([a81c044](https://github.com/Inogeo/giseye/commit/a81c044eebe0524ba6f2915dbece7f3607b1d5ee))
+
 ## [1.5.1](https://github.com/Inogeo/giseye/compare/v1.5.0...v1.5.1) (2022-12-14)
 
 
