@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.3](https://github.com/Inogeo/giseye/compare/v1.5.2...v1.5.3) (2022-12-21)
+
+
+### Bug Fixes
+
+* **docker:** the whole env file is used to avoid gaps in docker env vars declarations ([3a5192b](https://github.com/Inogeo/giseye/commit/3a5192b585c4b813c525394007f562df61162d25))
+
 ## [1.5.2](https://github.com/Inogeo/giseye/compare/v1.5.1...v1.5.2) (2022-12-20)
 
 
