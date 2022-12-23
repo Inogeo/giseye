@@ -21,10 +21,19 @@
 //     };
 // };
 
-export default function debounce(func, timeout = 300) {
+export default function debounce(func) {
+    console.log('debouncing');
+    console.log(func)
     let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(this, args); console.log('resized'); }, timeout);
+
+    return function (...args) {
+        const context = this;
+        func.apply(context, args);
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+            timer = null;
+            func.apply(context, args);
+            console.log('runninf debounced');
+        }, 500);
     };
 }

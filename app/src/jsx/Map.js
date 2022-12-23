@@ -7,13 +7,11 @@ import React, {
     //useEffect,
     useRef,
     useState,
-    useEffect
+    useEffect,
 } from "react";
 
-//import debounce from './utils/Debounce';
-
-// import useResizeObserver from "@react-hook/resize-observer";
-
+// Import debouncer hook
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Map() {
     const mapContainer = useRef(null);
@@ -22,6 +20,10 @@ export default function Map() {
     const [lat] = useState(46.227638);
     const [zoom] = useState(4);
     const [API_KEY] = useState(process.env.REACT_APP_MAPBOX_API_KEY);
+
+    const mapResizeDebounced = useDebouncedCallback(() => {
+        map.current.resize();
+    }, 20);
 
     useEffect(() => {
         if (map.current) return; //stops map from intializing more than once
@@ -35,11 +37,12 @@ export default function Map() {
         });
 
         const resizer = new ResizeObserver(entries => {
-            if (map.current) map.current.resize();    
+            if (map.current) mapResizeDebounced();
         });
+
         resizer.observe(mapContainer.current);
 
-    }, [API_KEY, lat, lng, zoom])
+    }, [API_KEY, lat, lng, zoom, mapResizeDebounced])
 
     return (
         <div className="uk-height-1-1">
