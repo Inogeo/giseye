@@ -29,7 +29,7 @@ export default function LegendLayer(props){
     return (
         <li key={props.layer.uuid} className='uk-open uk-background-muted uk-padding-small'>
             <a className='uk-accordion-title' href="/" uk-tooltip="Drag/Drop to re-order layers; delay: 500">
-                <span className="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table" uk-tooltip="Change layer order"></span>
+                {/* <span className="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table" uk-tooltip="Change layer order"></span> */}
                 {props.layer.title}
             </a>
             <div className='uk-accordion-content'>
