@@ -9,21 +9,9 @@ import React, {
   useState,
 } from "react";
 
-// Import Leaflet
-// import L from 'leaflet';
-// import 'leaflet/dist/leaflet.css';
-
 // Import JSX components
 import Catalog from './jsx/Catalog';
 import Map from './jsx/Map'
-
-// Fix for leaflet default markers sources
-//delete L.Icon.Default.prototype._getIconUrl;
-// L.Icon.Default.mergeOptions({type
-//   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png').default,
-//   iconUrl: require('leaflet/dist/images/marker-icon.png').default,
-//   shadowUrl: require('leaflet/dist/images/marker-shadow.png').default
-// });
 
 // Fix for uikit icons
 UIkit.use(Icons);
