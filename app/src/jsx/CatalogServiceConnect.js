@@ -81,7 +81,7 @@ export default function CatalogServiceConnect({ serviceConnect, handleLayerAdd }
             // Preparing the HTML for layer list
             serviceConnectLayers.data.forEach(layerElement => {
                 layersDOM.push(
-                    <div key={layerElement.uuid} className="uk-background-muted uk-padding-small uk-margin-small-top" >
+                    <div key={layerElement.sourceUUID} className="uk-background-muted uk-padding-small uk-margin-small-top" >
                         <div className="uk-grid-collapse" uk-grid="">
                             <div className="uk-width-3-4">
                                 <p className="uk-padding-remove uk-margin-remove uk-text-bold">{layerElement.title}</p>

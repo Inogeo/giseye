@@ -2,8 +2,6 @@
 import UIkit from 'uikit'
 import fetchWithTimeout from './FetchWithTimeout'
 import { v4 as uuidv4 } from 'uuid';
-//import { WMSTileLayer } from 'react-leaflet/WMSTileLayer'
-
 
 export class AdapterWMTS {
     /**
@@ -58,10 +56,9 @@ export class AdapterWMTS {
                 const layerURL = new URL(CapabilitiesURL.origin + CapabilitiesURL.pathname)
 
                 // Adding layer to layer list
-                const currentUUID = uuidv4()
                 layersJSON.push({
                     type: 'WMS',
-                    uuid: currentUUID,
+                    sourceUUID: uuidv4(),
                     title: title_xml,
                     abstract: abstract_xml,
                     url: layerURL,
@@ -140,10 +137,9 @@ export class AdapterWMS {
                 const layerURL = new URL(CapabilitiesURL.origin + CapabilitiesURL.pathname)
 
                 // Adding layer to layer list
-                const currentUUID = uuidv4()
                 layersJSON.push({
                     type: 'WMS',
-                    uuid: currentUUID,
+                    sourceUUID: uuidv4(),
                     title: title_xml,
                     abstract: abstract_xml,
                     identifier: identifier_xml, 

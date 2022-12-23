@@ -11,6 +11,10 @@ import React, {
 // Import JSX components
 import Catalog from './jsx/Catalog';
 import Map from './jsx/Map'
+import Legend from './jsx/Legend'
+
+// UUID to setup layers uuids
+import { v4 as uuidv4 } from 'uuid';
 
 // Fix for uikit icons
 UIkit.use(Icons);
@@ -18,20 +22,25 @@ UIkit.use(Icons);
 function App() {
 
   const mapRef = useRef(null);
+  const legendRef = useRef(null);
+  //const [layers, setLayers] = useState([]) 
 
-  function handleLayerAdd(e,layer) {
-    mapRef.current.handleLayerAdd(e, layer)
+  function handleLayerAdd(e, newLayer) {
+    // Attaching an unique ID to the layer
+    newLayer.UUID = uuidv4()
+
+    // Adding the new layer to the existing layer array
+    mapRef.current.handleLayerAdd(e, newLayer)
+    legendRef.current.handleLayerAdd(e, newLayer)
   }
 
   return (
     <div className='uk-text-center uk-height-1-1' uk-filter="target: .js-filter">
 
-      {/* Content */}
-
-      {/*Toolbar*/}
+      {/* Content */}      
       <div className='uk-grid-collapse uk-height-1-1' uk-grid=''>
 
-  
+        {/*Toolbar*/}
         <div className='uk-width-auto uk-height-1-1 uk-text-left uk-background-primary uk-light' filter-catalog='true' filter-map='true' filter-maponly='true'>
           <ul className="uk-iconnav uk-iconnav-vertical">
             <li className="uk-active" uk-filter-control="[filter-maponly='true']">
@@ -68,23 +77,7 @@ function App() {
           </div>
 
           {/* Main map legend */}
-          <div className='uk-width-1-6@l uk-width-1-5@m uk-padding-small uk-text-left uk-background-default' filter-catalog='true' filter-map='true'>
-            <p className='uk-text-large'>Legend</p>
-            <hr></hr>
-            <ul uk-accordion='' uk-sortable="handle: .uk-sortable-handle">
-              <li className='uk-open uk-background-muted uk-padding-small'>
-                <a className='uk-accordion-title' href="/" uk-tooltip="Drag/Drop to re-order layers; delay: 500">
-                  <span className="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table" uk-tooltip="Change layer order"></span>
-                  Layer 1
-                </a>
-                <div className='uk-accordion-content'>
-                  <span className="uk-margin-small-right uk-text-center" uk-icon="icon: ban" uk-tooltip="Toggle visibility"></span>
-                  <span className="uk-margin-small-right uk-text-center" uk-icon="icon: search" uk-tooltip="Zoom to extent" uk-filter-control="[filter-attable='layer']"></span>
-                  <input className="uk-range" type="range" value="2" min="0" max="10" step="0.1" readOnly={true}></input>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <Legend ref={legendRef} handleMapLayerOpacity={(e, layer) => { mapRef.current.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { mapRef.current.handleMapLayerVisibility(e, layer) }}></Legend>
 
         </div>
       </div>

@@ -38,12 +38,21 @@ const Map = forwardRef((props,ref) => {
 
     // DEBOUNCED FUNCTIONS 
 
+    // Change opacity (debounced)
+    const handleMapLayerOpacityDebounced = useDebouncedCallback((e , layer) => {
+        map.current.setPaintProperty(
+            layer.UUID,
+            'raster-opacity',
+            parseInt(e.target.value, 10) / 100
+        );
+    }, 20);
+
     // Resize map (debounced)
     const mapResizeDebounced = useDebouncedCallback(() => {
         map.current.resize();
     }, 20);
 
-    // Update URL coordinsate (debounced)
+    // Update URL coordinates (debounced)
     const mapUpdateURLDebounced = useDebouncedCallback(() => {
         const nextURL = new URL(window.location.href)
         const nextTitle = document.title
@@ -67,7 +76,7 @@ const Map = forwardRef((props,ref) => {
         }
     }, 50)
 
-    // Update map extend (based on coordinates)
+    // Change map center (based on coordinates)
     const mapUpdateCenterFromURLDebounced = useDebouncedCallback((e) => {
         const mapURL = new URL(e.target.location.href)
         map.current.flyTo({
@@ -104,27 +113,49 @@ const Map = forwardRef((props,ref) => {
     }, [API_KEY, x, y, z, mapResizeDebounced, mapUpdateURLDebounced, mapUpdateCenterFromURLDebounced])
 
     // HANDLE FUNCTIONS
-    useImperativeHandle(ref, (e, layer) => ({
-        handleLayerAdd(e, layer) {
-            map.current.addSource(
-                layer.uuid + '_source',
-                {
-                    'type': 'raster',
-                    'tiles': [
-                        layer.url.href +'?bbox={bbox-epsg-3857}&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&format=image/png&transparent=true&width=256&height=256&styles=&layers='+layer.identifier 
-                    ],
-                    'tileSize': 256
-                }
-            );
+    useImperativeHandle(ref, () => ({
+        handleLayerAdd(e, newLayer) {
+
+            // We create the source if layer is not existing
+            if (!map.current.getSource(newLayer.sourceUUID)){
+                map.current.addSource(
+                    newLayer.sourceUUID,
+                    {
+                        'type': 'raster',
+                        'tiles': [
+                            newLayer.url.href + '?bbox={bbox-epsg-3857}&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&format=image/png&transparent=true&width=256&height=256&styles=&layers=' + newLayer.identifier
+                        ],
+                        'tileSize': 256
+                    }
+                );
+            }
+            
+            // We add the layer in any cases
             map.current.addLayer(
                 {
-                    'id': layer.uuid + '_layer',
+                    'id': newLayer.UUID,
                     'type': 'raster',
-                    'source': layer.uuid + '_source',
+                    'source': newLayer.sourceUUID,
                     'paint': {}
                 },
             );
         },
+        
+        // Change layer opacity
+        handleMapLayerOpacity(e, layer){
+            handleMapLayerOpacityDebounced(e, layer)
+        },
+
+        // Change layer visibility
+        handleMapLayerVisibility(e, layer) {
+            if(map.current.getLayoutProperty(layer.UUID, 'visibility') !== 'none') {
+                    map.current.setLayoutProperty(layer.UUID, 'visibility', 'none')
+            }
+            else {
+                map.current.setLayoutProperty(layer.UUID, 'visibility', 'visible')
+            }
+           ;
+        }
     }));
 
     return (
