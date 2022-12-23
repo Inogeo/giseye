@@ -2,7 +2,7 @@
 import UIkit from 'uikit'
 import fetchWithTimeout from './FetchWithTimeout'
 import { v4 as uuidv4 } from 'uuid';
-import { WMSTileLayer } from 'react-leaflet/WMSTileLayer'
+//import { WMSTileLayer } from 'react-leaflet/WMSTileLayer'
 
 
 export class AdapterWMTS {
@@ -55,27 +55,28 @@ export class AdapterWMTS {
                 }
 
                 // Load layer identifier
-                var identifier_xml = ''
-                try {   
-                    identifier_xml = element.getElementsByTagName('ows:Identifier')[0].innerHTML
-                } catch (error) {
-                    UIkit.notification(`${title_xml} Layer: Error loading identifier. ${error}`, { status: 'danger' })
-                }
+                
+                // var identifier_xml = ''
+                // try {   
+                //     identifier_xml = element.getElementsByTagName('ows:Identifier')[0].innerHTML
+                // } catch (error) {
+                //     UIkit.notification(`${title_xml} Layer: Error loading identifier. ${error}`, { status: 'danger' })
+                // }
 
                 // Add identifier
                 const layerURL = new URL(CapabilitiesURL.origin + CapabilitiesURL.pathname)
 
-                const props = {
-                    //crs: "EPSG:3857",
-                    //token: "public",
-                    //version: "1.3",
-                    //uppercase: true,
-                    format: "image/png",
-                    transparent: true,
-                    tiles: true,
-                    styles: '',
-                    layers: identifier_xml,
-                };
+                // const props = {
+                //     //crs: "EPSG:3857",
+                //     //token: "public",
+                //     //version: "1.3",
+                //     //uppercase: true,
+                //     format: "image/png",
+                //     transparent: true,
+                //     tiles: true,
+                //     styles: '',
+                //     layers: identifier_xml,
+                // };
 
                 // Adding layer to layer list
                 const currentUUID = uuidv4()
@@ -85,7 +86,7 @@ export class AdapterWMTS {
                     title: title_xml,
                     abstract: abstract_xml,
                     url: layerURL,
-                    DOM: (<WMSTileLayer key={currentUUID} url={layerURL.origin + layerURL.pathname} {...props}></WMSTileLayer>)
+                    //DOM: (<WMSTileLayer key={currentUUID} url={layerURL.origin + layerURL.pathname} {...props}></WMSTileLayer>)
                 })
 
             }
@@ -160,17 +161,17 @@ export class AdapterWMS {
                 // Add identifier
                 const layerURL = new URL(CapabilitiesURL.origin + CapabilitiesURL.pathname)
 
-                const props = {
-                    //crs: "EPSG:3857",
-                    //token: "public",
-                    //version: "1.3",
-                    //uppercase: true,
-                    format: "image/png",
-                    transparent: true,
-                    tiles: true,
-                    styles: '',
-                    layers: identifier_xml,
-                };
+                // const props = {
+                //     //crs: "EPSG:3857",
+                //     //token: "public",
+                //     //version: "1.3",
+                //     //uppercase: true,
+                //     format: "image/png",
+                //     transparent: true,
+                //     tiles: true,
+                //     styles: '',
+                //     layers: identifier_xml,
+                // };
 
                 // Adding layer to layer list
                 const currentUUID = uuidv4()
@@ -181,7 +182,7 @@ export class AdapterWMS {
                     abstract: abstract_xml,
                     identifier: identifier_xml, 
                     url: layerURL,
-                    DOM: (<WMSTileLayer key={currentUUID} url={layerURL.origin + layerURL.pathname} {...props}></WMSTileLayer>)
+                    //DOM: (<WMSTileLayer key={currentUUID} url={layerURL.origin + layerURL.pathname} {...props}></WMSTileLayer>)
                 })
 
             }

@@ -31,6 +31,23 @@ function App() {
     )
   ))
 
+  // Fetching params from window
+  const queryParameters = new URLSearchParams(window.location.search)
+  var xURLParam
+  var yURLParam
+  var zURLParam
+  if (queryParameters.get("x") && queryParameters.get("y") && queryParameters.get("z")){
+    xURLParam = queryParameters.get("x")
+    yURLParam = queryParameters.get("y")
+    zURLParam = queryParameters.get("z")
+  }
+  else {
+    xURLParam = 18.411385
+    yURLParam = 25.850485
+    zURLParam = 1.766200
+  }
+
+
   return (
     <div className='uk-text-center uk-height-1-1' uk-filter="target: .js-filter">
 
@@ -72,7 +89,7 @@ function App() {
 
           {/* Main map */}
           <div className='uk-width-expand@m uk-height-1-1 uk-text-left' filter-catalog='true' filter-map='true' filter-maponly='true'>
-            <Map></Map>
+            <Map x={xURLParam} y={yURLParam} z={zURLParam} ></Map>
           </div>
 
           {/* Main map legend */}
