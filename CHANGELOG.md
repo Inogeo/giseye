@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.4](https://github.com/Inogeo/giseye/compare/v1.5.3...v1.5.4) (2022-12-21)
+
+
+### Bug Fixes
+
+* **map:** changed maplibre loading method to avoid error in production build ([b8ef400](https://github.com/Inogeo/giseye/commit/b8ef400c3fb67be888ecda0c6ffcb1588035e61c))
+
 ## [1.5.3](https://github.com/Inogeo/giseye/compare/v1.5.2...v1.5.3) (2022-12-21)
 
 
