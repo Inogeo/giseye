@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/Inogeo/giseye/compare/v1.6.0...v1.6.1) (2022-12-23)
+
+
+### Bug Fixes
+
+* **map:** temporary fix of WMS support ([cec5a22](https://github.com/Inogeo/giseye/commit/cec5a22ec5aa7343a61c4be4ea4df654ee866a28))
+
 ## [1.6.0](https://github.com/Inogeo/giseye/compare/v1.5.4...v1.6.0) (2022-12-23)
 
 
