@@ -57,11 +57,6 @@ export default function Map({x,y,z}) {
             center: [mapURL.searchParams.get('x'), mapURL.searchParams.get('y')],
             zoom: mapURL.searchParams.get('z')
         })
-        // map.current.setCenter([
-        //     mapURL.searchParams.get('x'),
-        //     mapURL.searchParams.get('y')
-        // ])
-        // map.current.setZoom(mapURL.searchParams.get('z'))
 
     }, 20);
 
