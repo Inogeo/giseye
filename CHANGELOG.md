@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0](https://github.com/Inogeo/giseye/compare/v1.5.4...v1.6.0) (2022-12-23)
+
+
+### Features
+
+* **map:** map is now synced with URL ([c225b68](https://github.com/Inogeo/giseye/commit/c225b68230f35127d8984b614832590542f91d9a))
+
+
+### Bug Fixes
+
+* **deps:** completely removed leaflet from dependencies ([34c3eb8](https://github.com/Inogeo/giseye/commit/34c3eb836d6dcaaee631c67b690eb466febd8965))
+* **map:** added debounce on container resize to improve stability ([bdc6ab5](https://github.com/Inogeo/giseye/commit/bdc6ab53d9124044718d878ef4f0969b7e720949))
+* **npm:** removed leaflet from dependencies ([5b04e03](https://github.com/Inogeo/giseye/commit/5b04e03ba58447eef504e6248a4b00aa8a316698))
+* **utils:** remove debounce from utils, as we are using now use-debounce library for react ([67a95f5](https://github.com/Inogeo/giseye/commit/67a95f5f098e08230a28d35a01527a2444c46aae))
+
 ## [1.5.4](https://github.com/Inogeo/giseye/compare/v1.5.3...v1.5.4) (2022-12-21)
 
 
