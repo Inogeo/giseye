@@ -18,7 +18,6 @@ export default function LegendLayer(props){
         else {
             opacityRangeRef.current.disabled = true
         }
-        console.log(opacityRangeRef.current.disabled)
 
         // TODO: Change icon style to red
 
