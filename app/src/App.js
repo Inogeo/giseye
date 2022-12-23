@@ -5,8 +5,7 @@ import Icons from 'uikit/dist/js/uikit-icons';
 
 // Import REACT
 import React, {
-  //useEffect,
-  useState,
+  useRef,
 } from "react";
 
 // Import JSX components
@@ -18,35 +17,11 @@ UIkit.use(Icons);
 
 function App() {
 
-  const [layers, setLayers] = useState([])
+  const mapRef = useRef(null);
 
   function handleLayerAdd(e,layer) {
-    setLayers(layers.concat([layer]))
+    mapRef.current.handleLayerAdd(e, layer)
   }
-
-  var mapLayersDOM = []
-  layers.forEach(layer => (
-    mapLayersDOM.push(
-      layer.DOM
-    )
-  ))
-
-  // Fetching params from window
-  const queryParameters = new URLSearchParams(window.location.search)
-  var xURLParam
-  var yURLParam
-  var zURLParam
-  if (queryParameters.get("x") && queryParameters.get("y") && queryParameters.get("z")){
-    xURLParam = queryParameters.get("x")
-    yURLParam = queryParameters.get("y")
-    zURLParam = queryParameters.get("z")
-  }
-  else {
-    xURLParam = 18.411385
-    yURLParam = 25.850485
-    zURLParam = 1.766200
-  }
-
 
   return (
     <div className='uk-text-center uk-height-1-1' uk-filter="target: .js-filter">
@@ -89,7 +64,7 @@ function App() {
 
           {/* Main map */}
           <div className='uk-width-expand@m uk-height-1-1 uk-text-left' filter-catalog='true' filter-map='true' filter-maponly='true'>
-            <Map x={xURLParam} y={yURLParam} z={zURLParam} ></Map>
+            <Map ref={mapRef}></Map>
           </div>
 
           {/* Main map legend */}

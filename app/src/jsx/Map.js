@@ -8,18 +8,35 @@ import React, {
     useRef,
     useState,
     useEffect,
+    forwardRef,
+    useImperativeHandle
 } from "react";
 
 // Import debouncer hook
 import { useDebouncedCallback } from "use-debounce";
 
-export default function Map({x,y,z}) {
+const Map = forwardRef((props,ref) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng] = useState(x);
-    const [lat] = useState(y);
-    const [zoom] = useState(z);
     const [API_KEY] = useState(process.env.REACT_APP_MAPBOX_API_KEY);
+
+    // Fetching params from window
+    const queryParameters = new URLSearchParams(window.location.search)
+    var x
+    var y
+    var z
+    if (queryParameters.get("x") && queryParameters.get("y") && queryParameters.get("z")) {
+        x = queryParameters.get("x")
+        y = queryParameters.get("y")
+        z = queryParameters.get("z")
+    }
+    else {
+        x = 18.411385
+        y = 25.850485
+        z = 1.766200
+    }
+
+    // DEBOUNCED FUNCTIONS 
 
     // Resize map (debounced)
     const mapResizeDebounced = useDebouncedCallback(() => {
@@ -57,16 +74,16 @@ export default function Map({x,y,z}) {
             center: [mapURL.searchParams.get('x'), mapURL.searchParams.get('y')],
             zoom: mapURL.searchParams.get('z')
         })
-
     }, 20);
 
+    // USEEFFECT: Set up the map and launch all listeners
     useEffect(() => {
         if (map.current) return; //stops map from intializing more than once
         map.current = new maplibregl.Map({
             container: mapContainer.current,
             style: `https://api.maptiler.com/maps/bright-v2/style.json?key=${API_KEY}`,
-            center: [lng, lat],
-            zoom: zoom,
+            center: [x, y],
+            zoom: z,
             trackResize: true,
             scrollZoom: true,
         });
@@ -84,7 +101,31 @@ export default function Map({x,y,z}) {
         // Fires map centering when windows back navigation buttons are changed
         window.addEventListener('popstate', e => mapUpdateCenterFromURLDebounced(e))
 
-    }, [API_KEY, lat, lng, zoom, mapResizeDebounced, mapUpdateURLDebounced, mapUpdateCenterFromURLDebounced])
+    }, [API_KEY, x, y, z, mapResizeDebounced, mapUpdateURLDebounced, mapUpdateCenterFromURLDebounced])
+
+    // HANDLE FUNCTIONS
+    useImperativeHandle(ref, (e, layer) => ({
+        handleLayerAdd(e, layer) {
+            map.current.addSource(
+                layer.uuid + '_source',
+                {
+                    'type': 'raster',
+                    'tiles': [
+                        layer.url.href +'?bbox={bbox-epsg-3857}&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&format=image/png&transparent=true&width=256&height=256&styles=&layers='+layer.identifier 
+                    ],
+                    'tileSize': 256
+                }
+            );
+            map.current.addLayer(
+                {
+                    'id': layer.uuid + '_layer',
+                    'type': 'raster',
+                    'source': layer.uuid + '_source',
+                    'paint': {}
+                },
+            );
+        },
+    }));
 
     return (
         <div className="uk-height-1-1">
@@ -92,4 +133,6 @@ export default function Map({x,y,z}) {
         </div>
     );
 
-}
+})
+
+export default Map

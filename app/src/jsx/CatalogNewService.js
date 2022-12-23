@@ -91,7 +91,7 @@ export default function CatalogNewService({handleNewServiceAddToCatalog}){
                     <div className="uk-margin-small">
                         <select className="uk-select uk-form-small" onChange={handleNewServiceTypeChange}>
                             <option value="">Select type</option>
-                            <option value="WMTS">WMTS</option>
+                            {/* <option value="WMTS">WMTS</option> */}
                             <option value="WMS">WMS</option>
                         </select>
                     </div>
