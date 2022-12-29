@@ -101,7 +101,7 @@ export default function CatalogServiceConnect({ serviceConnect, handleLayerAdd }
                     <p className='uk-text-large'>{serviceConnect.type} Service: {serviceConnect.name}</p>
                     <hr></hr>
                     <p>Data loaded and listed below.</p>
-                    <div className="uk-padding-remove uk-overflow-auto" style={{height:'calc(100vh - 150px)'}}>
+                    <div className="uk-padding-remove uk-overflow-auto" style={{height:'calc(100vh - 151px)'}}>
                         {layersDOM}
                     </div>
                 </div>

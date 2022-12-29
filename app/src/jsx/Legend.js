@@ -36,9 +36,11 @@ const Legend = forwardRef((props, ref) => {
         <div className='uk-width-1-6@l uk-width-1-5@m uk-padding-small uk-text-left uk-background-default' filter-catalog='true' filter-map='true'>
             <p className='uk-text-large'>Legend</p>
             <hr></hr>
-            <ul uk-accordion='multiple: true' uk-sortable="handle: .uk-sortable-handle">
-                {layersDOM}
-            </ul>
+            <div className="uk-overflow-auto" style={{ height: 'calc(100vh - 151px)' }} >
+                <ul uk-accordion='multiple: true' uk-sortable="handle: .uk-sortable-handle">
+                    {layersDOM}
+                </ul>
+            </div>
         </div>
     )
 })
