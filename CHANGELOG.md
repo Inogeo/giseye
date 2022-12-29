@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.0](https://github.com/Inogeo/giseye/compare/v1.6.1...v1.7.0) (2022-12-23)
+
+
+### Features
+
+* **legend:** legend controls are now operationnal ([67984b3](https://github.com/Inogeo/giseye/commit/67984b3d7ba5c36b9bc4d84b6ab0e8ca27214f15))
+
+
+### Bug Fixes
+
+* **legend:** removed unused console.log ([ed03259](https://github.com/Inogeo/giseye/commit/ed03259feec53e55c91a862f34029c9b64e07982))
+* **legend:** temporary disabled layer ordering ([d2bd5a6](https://github.com/Inogeo/giseye/commit/d2bd5a611772c68fb4ac3806def8add2c00789cb))
+
 ## [1.6.1](https://github.com/Inogeo/giseye/compare/v1.6.0...v1.6.1) (2022-12-23)
 
 
