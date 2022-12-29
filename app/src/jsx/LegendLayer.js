@@ -19,8 +19,14 @@ export default function LegendLayer(props){
             opacityRangeRef.current.disabled = true
         }
 
-        // TODO: Change icon style to red
-
+        // Change button color to red
+        if (e.target.classList.contains("uk-text-danger")){
+            e.target.classList.remove("uk-text-danger");
+        }
+        else {
+            e.target.classList.add("uk-text-danger");
+        }
+        
         // Toggle layer opacity in map component
         props.handleMapLayerVisibility(e, layer)
     }
