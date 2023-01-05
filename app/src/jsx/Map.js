@@ -41,7 +41,7 @@ const Map = forwardRef((props,ref) => {
     // Change opacity (debounced)
     const handleMapLayerOpacityDebounced = useDebouncedCallback((e , layer) => {
         map.current.setPaintProperty(
-            layer.UUID,
+            layer.pk,
             'raster-opacity',
             parseInt(e.target.value, 10) / 100
         );
@@ -133,7 +133,7 @@ const Map = forwardRef((props,ref) => {
             // We add the layer in any cases
             map.current.addLayer(
                 {
-                    'id': newLayer.UUID,
+                    'id': newLayer.pk,
                     'type': 'raster',
                     'source': newLayer.sourceUUID,
                     'paint': {}
@@ -148,11 +148,11 @@ const Map = forwardRef((props,ref) => {
 
         // Change layer visibility
         handleMapLayerVisibility(e, layer) {
-            if(map.current.getLayoutProperty(layer.UUID, 'visibility') !== 'none') {
-                    map.current.setLayoutProperty(layer.UUID, 'visibility', 'none')
+            if (map.current.getLayoutProperty(layer.pk, 'visibility') !== 'none') {
+                map.current.setLayoutProperty(layer.pk, 'visibility', 'none')
             }
             else {
-                map.current.setLayoutProperty(layer.UUID, 'visibility', 'visible')
+                map.current.setLayoutProperty(layer.pk, 'visibility', 'visible')
             }
            ;
         }

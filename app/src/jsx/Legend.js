@@ -1,34 +1,29 @@
-// Import REACT
-import React, {
-    //useEffect,
-    //useRef,
-    useState,
-    //useEffect,
-    forwardRef,
-    useImperativeHandle
-} from "react";
-
 // JSX components
 import LegendLayer from "./LegendLayer";
 
+import { 
+    forwardRef,
+    useState, 
+    useImperativeHandle
+} from "react"
+
 const Legend = forwardRef((props, ref) => {
 
-    const [layers, setLayers] = useState([]) 
+    const [layers, setLayers] = useState([])
 
-    // HANDLE FUNCTIONS (callable from parent)
     useImperativeHandle(ref, () => ({
-        handleLayerAdd(e, newLayer) {
-            const newLayers = [...layers, newLayer]
-            setLayers(newLayers)
-            
-        },
-    }));
+        handleLayerAdd(e, newLayer){
+            console.log(newLayer)
+            setLayers([...layers, newLayer])
+        }
+    }))
 
+    console.log(layers)
     const layersDOM = []
     for (var i = 0; i < layers.length; i++) {
         const layer = layers[i]
         layersDOM.push(
-            <LegendLayer key={layer.UUID} layer={layer} handleMapLayerOpacity={(e, layer) => { props.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.handleMapLayerVisibility(e, layer)}}></LegendLayer>
+            <LegendLayer key={layer.pk} layer={layer} handleMapLayerOpacity={(e, layer) => { props.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.handleMapLayerVisibility(e, layer)}}></LegendLayer>
         )
     }
 

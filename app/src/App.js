@@ -23,15 +23,18 @@ function App() {
 
   const mapRef = useRef(null);
   const legendRef = useRef(null);
-  //const [layers, setLayers] = useState([]) 
 
   function handleLayerAdd(e, newLayer) {
-    // Attaching an unique ID to the layer
-    newLayer.UUID = uuidv4()
+    
+    // Copying layer object and assigning a single UUID
+    const uniqueNewLayer = Object.assign({}, newLayer);
+    uniqueNewLayer.pk = uuidv4().toString()
 
-    // Adding the new layer to the existing layer array
-    mapRef.current.handleLayerAdd(e, newLayer)
-    legendRef.current.handleLayerAdd(e, newLayer)
+    // Add layer to map
+    mapRef.current.handleLayerAdd(e, uniqueNewLayer)
+    // Add layer to legend
+    legendRef.current.handleLayerAdd(e, uniqueNewLayer)
+
   }
 
   return (
