@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.1](https://github.com/Inogeo/giseye/compare/v1.7.0...v1.7.1) (2022-12-29)
+
+
+### Bug Fixes
+
+* **LegendLayer:** fixed color change on visibility toggling button ([60b30f7](https://github.com/Inogeo/giseye/commit/60b30f74c5c65fa63307e3ba686c64d4d25a171d))
+* **UX:** fixed minor bugs in height of display ([4756884](https://github.com/Inogeo/giseye/commit/47568847cfcbf4f50986bd823bf6714f08e5c489))
+
 ## [1.7.0](https://github.com/Inogeo/giseye/compare/v1.6.1...v1.7.0) (2022-12-23)
 
 
