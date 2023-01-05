@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.2](https://github.com/Inogeo/giseye/compare/v1.7.1...v1.7.2) (2023-01-05)
+
+
+### Bug Fixes
+
+* **Legend:** Bug fix on layer object duplicates when the same layer is added twice to the project ([5e99eaf](https://github.com/Inogeo/giseye/commit/5e99eaf4324b4cca858bf57e3224795878752848))
+* **Legend:** simplification of map method calls ([62ab11f](https://github.com/Inogeo/giseye/commit/62ab11f214a30bdf252e2af1fec76c8ffa0971fb))
+
 ## [1.7.1](https://github.com/Inogeo/giseye/compare/v1.7.0...v1.7.1) (2022-12-29)
 
 
