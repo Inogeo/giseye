@@ -23,7 +23,7 @@ const Legend = forwardRef((props, ref) => {
     for (var i = 0; i < layers.length; i++) {
         const layer = layers[i]
         layersDOM.push(
-            <LegendLayer key={layer.pk} layer={layer} handleMapLayerOpacity={(e, layer) => { props.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.handleMapLayerVisibility(e, layer)}}></LegendLayer>
+            <LegendLayer key={layer.pk} layer={layer} handleMapLayerOpacity={(e, layer) => { props.targetMapRef.current.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.targetMapRef.current.handleMapLayerVisibility(e, layer)}}></LegendLayer>
         )
     }
 

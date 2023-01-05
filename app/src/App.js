@@ -80,7 +80,7 @@ function App() {
           </div>
 
           {/* Main map legend */}
-          <Legend ref={legendRef} handleMapLayerOpacity={(e, layer) => { mapRef.current.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { mapRef.current.handleMapLayerVisibility(e, layer) }}></Legend>
+          <Legend ref={legendRef} targetMapRef={mapRef}></Legend>
 
         </div>
       </div>
