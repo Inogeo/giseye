@@ -1,5 +1,6 @@
 // Import UIKIT (front-end css framework)
 import UIkit from 'uikit'
+import WMSCapabilities from 'ol/format/WMSCapabilities.js';
 import fetchWithTimeout from './FetchWithTimeout'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -96,42 +97,22 @@ export class AdapterWMS {
         CapabilitiesURL.searchParams.append('SERVICE', 'WMS')
         CapabilitiesURL.searchParams.append('REQUEST', 'GetCapabilities')
 
+       
+        const capabilitiesParser = new WMSCapabilities();
+
         fetchWithTimeout(this.baseurl).then(function (response) {
             return response.text()
         }).then(function (response) {
-            const parser = new DOMParser()
-            const doc = parser.parseFromString(response, "application/xml")
-            const layersXML = doc.documentElement.getElementsByTagName('Layer')
+            
+            const capabilities = capabilitiesParser.read(response);
+            console.log(capabilities)
 
             // Parsing XML to load essential elements
+            const layersCapabilities = capabilities.Capability.Layer.Layer
             const layersJSON = []
-            for (let i = 0; i < layersXML.length; i++) {
+            for (let i = 0; i < layersCapabilities.length; i++) {
                 // Fetching element
-                const element = layersXML[i]
-
-                // Load title
-                var title_xml = ''
-                try {
-                    title_xml = element.getElementsByTagName('Title')[0].innerHTML
-                } catch (error) {
-                    UIkit.notification(`Error loading layer title. ${error}`, { status: 'danger' })
-                }
-
-                // Load abstract
-                var abstract_xml = ''
-                try {
-                    abstract_xml = element.getElementsByTagName('Abstract')[0].innerHTML
-                } catch (error) {
-                    // UIkit.notification(`${title_xml} Layer: Error loading abstract. ${error}`, { status: 'warning' })
-                }
-
-                // Load layer identifier
-                var identifier_xml = ''
-                try {
-                    identifier_xml = element.getElementsByTagName('Name')[0].innerHTML
-                } catch (error) {
-                    UIkit.notification(`${title_xml} Layer: Error loading identifier. ${error}`, { status: 'danger' })
-                }
+                const layerCapabilities = layersCapabilities[i]
 
                 // Add identifier
                 const layerURL = new URL(CapabilitiesURL.origin + CapabilitiesURL.pathname)
@@ -140,9 +121,9 @@ export class AdapterWMS {
                 layersJSON.push({
                     type: 'WMS',
                     sourceUUID: uuidv4(),
-                    title: title_xml,
-                    abstract: abstract_xml,
-                    identifier: identifier_xml, 
+                    title: layerCapabilities.Title,
+                    abstract: layerCapabilities.Abstract,
+                    identifier: layerCapabilities.Name, 
                     url: layerURL,
                 })
 
