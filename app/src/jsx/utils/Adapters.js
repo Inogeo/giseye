@@ -105,7 +105,6 @@ export class AdapterWMS {
         }).then(function (response) {
             
             const capabilities = capabilitiesParser.read(response);
-            console.log(capabilities)
 
             // Parsing XML to load essential elements
             const layersCapabilities = capabilities.Capability.Layer.Layer

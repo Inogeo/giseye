@@ -13,12 +13,10 @@ const Legend = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         handleLayerAdd(e, newLayer){
-            console.log(newLayer)
             setLayers([...layers, newLayer])
         }
     }))
 
-    console.log(layers)
     const layersDOM = []
     for (var i = 0; i < layers.length; i++) {
         const layer = layers[i]
