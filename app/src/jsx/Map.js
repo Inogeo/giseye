@@ -114,7 +114,7 @@ const Map = forwardRef((props,ref) => {
 
     // HANDLE FUNCTIONS
     useImperativeHandle(ref, () => ({
-        handleLayerAdd(e, newLayer) {
+        handleMapLayerAdd(e, newLayer) {
 
             // We create the source if layer is not existing
             if (!map.current.getSource(newLayer.sourceUUID)){
@@ -140,6 +140,11 @@ const Map = forwardRef((props,ref) => {
                 },
             );
         },
+
+        // Remove layer from map
+        handleMapLayerRemove(e, layer) {
+            map.current.removeLayer(layer.pk)
+        },
         
         // Change layer opacity
         handleMapLayerOpacity(e, layer){
@@ -155,7 +160,10 @@ const Map = forwardRef((props,ref) => {
                 map.current.setLayoutProperty(layer.pk, 'visibility', 'visible')
             }
            ;
-        }
+        },
+
+
+
     }));
 
     return (

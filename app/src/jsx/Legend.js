@@ -12,16 +12,25 @@ const Legend = forwardRef((props, ref) => {
     const [layers, setLayers] = useState([])
 
     useImperativeHandle(ref, () => ({
-        handleLayerAdd(e, newLayer){
+        handleLegendLayerAdd(e, newLayer){
             setLayers([...layers, newLayer])
-        }
+        },
+        handleLegendLayerRemove(e, layer) {
+            // Filtering array without pk
+            var layerToUpdate = layers;
+            var layersUpdated = layerToUpdate.filter(function (layerToFilter, index, arr) {
+                return layerToFilter.pk !== layer.pk ;
+            });
+            // Updating array with layers
+            setLayers(layersUpdated)
+        },
     }))
 
     const layersDOM = []
     for (var i = 0; i < layers.length; i++) {
         const layer = layers[i]
         layersDOM.push(
-            <LegendLayer key={layer.pk} layer={layer} handleMapLayerOpacity={(e, layer) => { props.targetMapRef.current.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.targetMapRef.current.handleMapLayerVisibility(e, layer)}}></LegendLayer>
+            <LegendLayer key={layer.pk} layer={layer} handleLayerRemove={(e, layer) => { props.handleLayerRemove(e, layer) }} handleMapLayerOpacity={(e, layer) => { props.targetMapRef.current.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.targetMapRef.current.handleMapLayerVisibility(e, layer)}}></LegendLayer>
         )
     }
 

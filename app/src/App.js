@@ -31,9 +31,19 @@ function App() {
     uniqueNewLayer.pk = uuidv4().toString()
 
     // Add layer to map
-    mapRef.current.handleLayerAdd(e, uniqueNewLayer)
+    mapRef.current.handleMapLayerAdd(e, uniqueNewLayer)
     // Add layer to legend
-    legendRef.current.handleLayerAdd(e, uniqueNewLayer)
+    legendRef.current.handleLegendLayerAdd(e, uniqueNewLayer)
+
+  }
+
+  function handleLayerRemove(e, layer) {
+
+    // Remove layer from legend
+    legendRef.current.handleLegendLayerRemove(e, layer)
+
+    // Remove layer from map
+    mapRef.current.handleMapLayerRemove(e, layer)
 
   }
 
@@ -80,7 +90,7 @@ function App() {
           </div>
 
           {/* Main map legend */}
-          <Legend ref={legendRef} targetMapRef={mapRef}></Legend>
+          <Legend ref={legendRef} targetMapRef={mapRef} handleLayerRemove={handleLayerRemove}></Legend>
 
         </div>
       </div>
