@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.8.0](https://github.com/Inogeo/giseye/compare/v1.7.2...v1.8.0) (2023-01-10)
+
+
+### Features
+
+* **App:** added the capacity of removing layers ([78f589a](https://github.com/Inogeo/giseye/commit/78f589a281c6650c466e5c1a822f08f7ac5400c7))
+
+
+### Bug Fixes
+
+* **Adapter:** improved compatibility of WMS capabilities parser by using OpenLayer library to parse capabitlies. ([9ad69c5](https://github.com/Inogeo/giseye/commit/9ad69c56832160caebb1e5e2923ea6ce92d0e0aa))
+* **Adapter:** WMTS capabilities parser changed to use OpenLayers library ([bab9487](https://github.com/Inogeo/giseye/commit/bab94872ab1e4e8485bd0c039f26ad0e85b4992a))
+
 ## [1.7.2](https://github.com/Inogeo/giseye/compare/v1.7.1...v1.7.2) (2023-01-05)
 
 
