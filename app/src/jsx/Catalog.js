@@ -1,5 +1,5 @@
 // Import REACT
-import React, {
+import  {
     //useEffect,
     useState
 } from "react";
@@ -10,7 +10,7 @@ import CatalogNewService from "./CatalogNewService";
 import CatalogServicesList from "./CatalogServicesList";
 
 
-export default function Catalog({handleLayerAdd}){
+export default function Catalog(){
 
 
     const [services, setServices] = useState([])
@@ -39,7 +39,7 @@ export default function Catalog({handleLayerAdd}){
 
                 {/* Service connected (ServiceConnect) */}
                 <div className='uk-width-3-5@s uk-padding-small uk-text-left uk-background-default'>
-                    <CatalogServiceConnect key={serviceConnect.uuid} serviceConnect={serviceConnect} handleLayerAdd={handleLayerAdd}></CatalogServiceConnect>
+                    <CatalogServiceConnect key={serviceConnect.uuid} serviceConnect={serviceConnect}></CatalogServiceConnect>
                 </div>
             </div>
         </div >

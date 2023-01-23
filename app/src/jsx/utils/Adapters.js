@@ -30,9 +30,9 @@ export class AdapterWMTS {
         fetchWithTimeout(this.baseurl).then(function (response) {
             return response.text()
         }).then(function (response) {
-
+            
+            // Get capabilities with openLayer parser
             const capabilities = capabilitiesParser.read(response);
-            console.log(capabilities)
 
             // Parsing XML to load essential elements
             const layersCapabilities = capabilities.Contents.Layer
@@ -51,7 +51,7 @@ export class AdapterWMTS {
                     title: layerCapabilities.Title,
                     abstract: layerCapabilities.Abstract,
                     identifier: layerCapabilities.Identifier,
-                    url: layerURL,
+                    url: layerURL.href,
                 })
 
             }
@@ -60,7 +60,7 @@ export class AdapterWMTS {
             handleLoadLayerCallback(layersJSON)
 
         }).catch((error) => {
-            UIkit.notification(`Error loading WMS service. ${error}`, { status: 'danger' })
+            UIkit.notification(`Error loading WMTS service. ${error}`, { status: 'danger' })
         })
     }
 
@@ -112,7 +112,7 @@ export class AdapterWMS {
                     title: layerCapabilities.Title,
                     abstract: layerCapabilities.Abstract,
                     identifier: layerCapabilities.Name, 
-                    url: layerURL,
+                    url: layerURL.href,
                 })
 
             }
