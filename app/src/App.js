@@ -3,40 +3,15 @@ import UIkit from 'uikit';
 import 'uikit/dist/css/uikit.css';
 import Icons from 'uikit/dist/js/uikit-icons';
 
-// Import REACT
-import React, {
-  useRef,
-} from "react";
-
 // Import JSX components
 import Catalog from './jsx/Catalog';
 import Map from './jsx/Map'
 import Legend from './jsx/Legend'
 
-// UUID to setup layers uuids
-import { v4 as uuidv4 } from 'uuid';
-
 // Fix for uikit icons
 UIkit.use(Icons);
 
 function App() {
-
-  const mapRef = useRef(null);
-  const legendRef = useRef(null);
-
-  function handleLayerAdd(e, newLayer) {
-    
-    // Copying layer object and assigning a single UUID
-    const uniqueNewLayer = Object.assign({}, newLayer);
-    uniqueNewLayer.pk = uuidv4().toString()
-
-    // Add layer to map
-    mapRef.current.handleLayerAdd(e, uniqueNewLayer)
-    // Add layer to legend
-    legendRef.current.handleLayerAdd(e, uniqueNewLayer)
-
-  }
-
   return (
     <div className='uk-text-center uk-height-1-1' uk-filter="target: .js-filter">
 
@@ -72,15 +47,15 @@ function App() {
         <div className='uk-grid-collapse js-filter uk-height-1-1 uk-width-expand uk-overflow-auto' uk-grid=''>
 
           {/*Catalog*/}
-          <Catalog handleLayerAdd={handleLayerAdd}></Catalog>
+          <Catalog></Catalog>
 
           {/* Main map */}
           <div className='uk-width-expand@m uk-height-1-1 uk-text-left' filter-catalog='true' filter-map='true' filter-maponly='true'>
-            <Map ref={mapRef}></Map>
+            <Map></Map>
           </div>
 
           {/* Main map legend */}
-          <Legend ref={legendRef} targetMapRef={mapRef}></Legend>
+          <Legend></Legend>
 
         </div>
       </div>

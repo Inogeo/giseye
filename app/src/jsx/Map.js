@@ -3,50 +3,43 @@ import maplibregl from '!maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 // Import REACT
-import React, {
-    //useEffect,
+import  {
     useRef,
     useState,
-    useEffect,
-    forwardRef,
-    useImperativeHandle
+    useEffect
 } from "react";
+
+// Import REDUX
+import {
+    useSelector,
+    useDispatch
+} from "react-redux";
+
+// Import REDUX custom selectors
+import { layerSliceStateGetLayerListWithoutStyle, mapSliceGet } from './utils/ReduxSelectors';
+import { setMapLocation } from './slices/MapSlice';
 
 // Import debouncer hook
 import { useDebouncedCallback } from "use-debounce";
 
-const Map = forwardRef((props,ref) => {
+// JSX components
+import MapLayer from './MapLayer';
+
+export default function Map() {
+
+    // Refs mandatory to render map
     const mapContainer = useRef(null);
     const map = useRef(null);
+    const dispatch = useDispatch()
+    
+    // Attaching layers to REDUX Store State
+    const mapCenter = useSelector((state) => mapSliceGet(state))
+    const layers = useSelector(state => layerSliceStateGetLayerListWithoutStyle(state));
+
+    // UseFul to display background layer
     const [API_KEY] = useState(process.env.REACT_APP_MAPBOX_API_KEY);
 
-    // Fetching params from window
-    const queryParameters = new URLSearchParams(window.location.search)
-    var x
-    var y
-    var z
-    if (queryParameters.get("x") && queryParameters.get("y") && queryParameters.get("z")) {
-        x = queryParameters.get("x")
-        y = queryParameters.get("y")
-        z = queryParameters.get("z")
-    }
-    else {
-        x = 18.411385
-        y = 25.850485
-        z = 1.766200
-    }
-
-    // DEBOUNCED FUNCTIONS 
-
-    // Change opacity (debounced)
-    const handleMapLayerOpacityDebounced = useDebouncedCallback((e , layer) => {
-        map.current.setPaintProperty(
-            layer.pk,
-            'raster-opacity',
-            parseInt(e.target.value, 10) / 100
-        );
-    }, 20);
-
+    // DEBOUNCED FUNCTIONS
     // Resize map (debounced)
     const mapResizeDebounced = useDebouncedCallback(() => {
         map.current.resize();
@@ -54,49 +47,37 @@ const Map = forwardRef((props,ref) => {
 
     // Update URL coordinates (debounced)
     const mapUpdateURLDebounced = useDebouncedCallback(() => {
-        const nextURL = new URL(window.location.href)
-        const nextTitle = document.title
-        const currentMapCoords = map.current.getCenter()
-        nextURL.searchParams.set('x', currentMapCoords.lng.toFixed(6))
-        nextURL.searchParams.set('y', currentMapCoords.lat.toFixed(6))
-        nextURL.searchParams.set('z', map.current.getZoom().toFixed(6))
-
-        const nextState = { additionalInformation: currentMapCoords.lng.toFixed(6).toString() + '_' + currentMapCoords.lat.toFixed(6).toString() + "_" + map.current.getZoom().toFixed(6).toString() };
         
-        // We update window history only if state is new
-        if (window.history.state){
-            if (window.history.state.additionalInformation !== nextState.additionalInformation) {
-                window.history.pushState(nextState, nextTitle, nextURL);
-                window.history.replaceState(nextState, nextTitle, nextURL);
-            }
+        // Fetch map coordinates 
+        const currentMap = map.current
+        const payload = {
+            x : currentMap.getCenter().lng.toFixed(6),
+            y : currentMap.getCenter().lat.toFixed(6),
+            z : currentMap.getZoom().toFixed(6)
         }
-        else {
-            window.history.pushState(nextState, nextTitle, nextURL);
-            window.history.replaceState(nextState, nextTitle, nextURL);
-        }
-    }, 50)
 
-    // Change map center (based on coordinates)
-    const mapUpdateCenterFromURLDebounced = useDebouncedCallback((e) => {
-        const mapURL = new URL(e.target.location.href)
-        map.current.flyTo({
-            center: [mapURL.searchParams.get('x'), mapURL.searchParams.get('y')],
-            zoom: mapURL.searchParams.get('z')
-        })
-    }, 20);
+        // Send them to REDUX reducer
+        dispatch(setMapLocation(payload))
 
-    // USEEFFECT: Set up the map and launch all listeners
+    }, 20)
+    
+    // USEEFFECT
+    // Set up the map
     useEffect(() => {
         if (map.current) return; //stops map from intializing more than once
-        map.current = new maplibregl.Map({
+
+        // initial map configuration
+        const initialMapConfig = {
             container: mapContainer.current,
             style: `https://api.maptiler.com/maps/bright-v2/style.json?key=${API_KEY}`,
-            center: [x, y],
-            zoom: z,
             trackResize: true,
             scrollZoom: true,
-        });
+            center: [18.411385, 25.850485],
+            zoom: 1.766200
+        }
 
+        map.current = new maplibregl.Map(initialMapConfig);
+        map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
 
         // Fires debounced resize when map is resized
         const resizer = new ResizeObserver(entries => {
@@ -107,63 +88,49 @@ const Map = forwardRef((props,ref) => {
         // Fires debounced coordinates updates in get params when map is moved
         map.current.on('moveend', function () { mapUpdateURLDebounced() });
 
-        // Fires map centering when windows back navigation buttons are changed
-        window.addEventListener('popstate', e => mapUpdateCenterFromURLDebounced(e))
+        // Fires map centering when browser window back and forward navigation buttons are used
+        // window.addEventListener('popstate', e => mapUpdateCenterFromURLDebounced(e))
 
-    }, [API_KEY, x, y, z, mapResizeDebounced, mapUpdateURLDebounced, mapUpdateCenterFromURLDebounced])
+    }, [API_KEY, mapResizeDebounced, mapUpdateURLDebounced, layers])
 
-    // HANDLE FUNCTIONS
-    useImperativeHandle(ref, () => ({
-        handleLayerAdd(e, newLayer) {
+    // Adjust the map config depending on state
+    useEffect(() => {
 
-            // We create the source if layer is not existing
-            if (!map.current.getSource(newLayer.sourceUUID)){
-                map.current.addSource(
-                    newLayer.sourceUUID,
-                    {
-                        'type': 'raster',
-                        'tiles': [
-                            newLayer.url.href + '?bbox={bbox-epsg-3857}&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&format=image/png&transparent=true&width=256&height=256&styles=&layers=' + newLayer.identifier
-                        ],
-                        'tileSize': 256
-                    }
-                );
-            }
-            
-            // We add the layer in any cases
-            map.current.addLayer(
-                {
-                    'id': newLayer.pk,
-                    'type': 'raster',
-                    'source': newLayer.sourceUUID,
-                    'paint': {}
-                },
-            );
-        },
-        
-        // Change layer opacity
-        handleMapLayerOpacity(e, layer){
-            handleMapLayerOpacityDebounced(e, layer)
-        },
-
-        // Change layer visibility
-        handleMapLayerVisibility(e, layer) {
-            if (map.current.getLayoutProperty(layer.pk, 'visibility') !== 'none') {
-                map.current.setLayoutProperty(layer.pk, 'visibility', 'none')
-            }
-            else {
-                map.current.setLayoutProperty(layer.pk, 'visibility', 'visible')
-            }
-           ;
+        // Fetch map coordinates 
+        const currentMap = map.current
+        const mapCurrentCenter = {
+            x: currentMap.getCenter().lng.toFixed(6),
+            y: currentMap.getCenter().lat.toFixed(6),
+            z: map.current.getZoom().toFixed(6)
         }
-    }));
+
+        // If state coordinates are different from map current coordinates, we move the map
+        console.log('map location update')
+        if (JSON.stringify(mapCurrentCenter) !== JSON.stringify(mapCenter)){
+            map.current.flyTo({
+                center: [mapCenter.x, mapCenter.y],
+                zoom: mapCenter.z
+            })
+        }
+
+    },[mapCenter])
+
+    // RENDER
+
+    // Fetch the list of layers and render them
+    const layersDOM = []
+    for (var i = 0; i < layers.length; i++) {
+        const layer = layers[i]
+        layersDOM.push(
+            <MapLayer key={layer.pk} layerPK={layer.pk} targetMap={map}></MapLayer>
+        )
+    }
 
     return (
         <div className="uk-height-1-1">
-            <div className="uk-height-1-1" ref={mapContainer} ></div>
+            <div className="uk-height-1-1" ref={mapContainer} >
+                {layersDOM}
+            </div>
         </div>
     );
-
-})
-
-export default Map
+}

@@ -1,6 +1,6 @@
 
 // Import REACT
-import React, {
+import  {
     //useEffect,
     useState
 } from "react";

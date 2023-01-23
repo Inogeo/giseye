@@ -1,27 +1,25 @@
+// Libraries
+import {
+    //useDispatch,
+    useSelector,
+} from "react-redux";
+
 // JSX components
 import LegendLayer from "./LegendLayer";
 
-import { 
-    forwardRef,
-    useState, 
-    useImperativeHandle
-} from "react"
+// REDUX Selectors
+import { layerSliceStateGetLayerListWithoutStyle } from "./utils/ReduxSelectors";
 
-const Legend = forwardRef((props, ref) => {
+export default function Legend() {
 
-    const [layers, setLayers] = useState([])
-
-    useImperativeHandle(ref, () => ({
-        handleLayerAdd(e, newLayer){
-            setLayers([...layers, newLayer])
-        }
-    }))
+    // Attaching layers to REDUX Store State (here layers without style)
+    const layers = useSelector(state => layerSliceStateGetLayerListWithoutStyle(state));
 
     const layersDOM = []
     for (var i = 0; i < layers.length; i++) {
         const layer = layers[i]
         layersDOM.push(
-            <LegendLayer key={layer.pk} layer={layer} handleMapLayerOpacity={(e, layer) => { props.targetMapRef.current.handleMapLayerOpacity(e, layer) }} handleMapLayerVisibility={(e, layer) => { props.targetMapRef.current.handleMapLayerVisibility(e, layer)}}></LegendLayer>
+            <LegendLayer key={layer.pk} layerPK={layer.pk}></LegendLayer>
         )
     }
 
@@ -36,6 +34,4 @@ const Legend = forwardRef((props, ref) => {
             </div>
         </div>
     )
-})
-
-export default Legend
+}
