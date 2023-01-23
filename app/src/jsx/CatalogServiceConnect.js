@@ -1,14 +1,21 @@
-import React, {
+import {
     useEffect,
     useState,
 } from "react";
 
+// Import REDUX
+import { useDispatch } from 'react-redux'
+
+// Import from redux store
+import { addLayer } from "./slices/LayersSlice";
+
+// Adapters
 import {AdapterWMTS, AdapterWMS} from './utils/Adapters'
 
 
-export default function CatalogServiceConnect({ serviceConnect, handleLayerAdd }){
-
-    var serviceConnectDOM
+export default function CatalogServiceConnect({ serviceConnect }){
+    
+    const dispatch = useDispatch()
     const [serviceConnectLayers, setServiceConnectLayersList] = useState(
         {
             'loaded': false,
@@ -54,6 +61,7 @@ export default function CatalogServiceConnect({ serviceConnect, handleLayerAdd }
     }, [serviceConnect, serviceConnectLayers.loaded, serviceConnectLayers.loading]);
 
     // IF no service is connected yet
+    var serviceConnectDOM
     if (!('url' in serviceConnect)){
         serviceConnectDOM = (
             <div>
@@ -88,7 +96,7 @@ export default function CatalogServiceConnect({ serviceConnect, handleLayerAdd }
                             </div>
                             <div className="uk-width-1-4">
                                 <ul className="uk-iconnav">
-                                    <li><button uk-icon="icon: plus" uk-tooltip="title: Add to map" onClick={e => handleLayerAdd(e, layerElement)}></button></li>
+                                    <li><button uk-icon="icon: plus" uk-tooltip="title: Add to map" onClick={() => dispatch(addLayer(layerElement))}></button></li>
                                 </ul>
                             </div>
                         </div>
