@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/Inogeo/giseye/compare/v2.0.0...v2.1.0) (2023-02-25)
+
+
+### Features
+
+* **CICD:** added image push to docker ([bcddd91](https://github.com/Inogeo/giseye/commit/bcddd9185934db43dbaee0517feea416fa00515b))
+
 ## [2.0.0](https://github.com/Inogeo/giseye/compare/v1.7.2...v2.0.0) (2023-01-23)
 
 
